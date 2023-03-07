@@ -1,5 +1,5 @@
 <template>
-  <label v-if="label">{{label}}</label>
+  <label v-if="label">{{label}} {{ modelValue }}</label>
       <select
         :value="modelValue"
         class="field"
@@ -10,10 +10,11 @@
       >
         <option
           v-for="option in options"
-          :value="option"
-          :key="option"
-          :selected="option === modelValue"
-        >{{ option }}</option>
+          :value="option.value"
+          :key="option.value"
+          :selected="option.value === modelValue"
+          :disabled="option.value === 0 ? true : false"
+        >{{ option.label }}</option>
       </select>
 </template>
 <script>

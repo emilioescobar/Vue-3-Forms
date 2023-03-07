@@ -3,7 +3,7 @@
     <h1>Create an event</h1>
     <form @submit.prevent="sendForm">
       <BaseSelect
-        :options="categories"
+        :options="categorias"
         v-model="event.category"
         label="Select a category"
       />
@@ -77,8 +77,17 @@ export default {
         'food',
         'community'
       ],
+      categorias: [
+        { label: 'Elija una opción', value: 0 },
+        { label: 'nature', value: 1 },
+        { label: 'animal welfare', value: 2 },
+        { label: 'housing', value: 3 },
+        { label: 'education', value: 4 },
+        { label: 'food', value: 5 },
+        { label: 'community', value: 6 }
+      ],
       event: {
-        category: '',
+        category: '0',
         title: '',
         description: '',
         location: '',
