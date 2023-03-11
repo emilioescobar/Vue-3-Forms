@@ -1,23 +1,25 @@
 <template>
-  <label v-if="label">{{label}} {{ modelValue }}</label>
-      <select
-        :value="modelValue"
-        class="field"
-        v-bind="{
-          ...$attrs,
-          onChange: ($event) => {$emit('update:modelValue', $event.target.value)}
-        }"
-      >
-        <option
-          v-for="option in options"
-          :value="option.value"
-          :key="option.value"
-          :selected="option.value === modelValue"
-          :disabled="option.value === 0 ? true : false"
-        >{{ option.label }}</option>
-      </select>
+  <label :for="uuid" v-if="label">{{label}} </label>
+  <select
+    :value="modelValue"
+    class="field"
+    v-bind="{
+      ...$attrs,
+      onChange: ($event) => {$emit('update:modelValue', $event.target.value)}
+    }"
+    :id="uuid"
+  >
+    <option
+      v-for="option in options"
+      :value="option.value"
+      :key="option.value"
+      :selected="option.value === modelValue"
+
+    >{{ option.label }}</option>
+  </select>
 </template>
 <script>
+import UniqueID from '../features/UniqueID'
 export default {
   props: {
     label: {
@@ -31,6 +33,12 @@ export default {
     options: {
       type: Array,
       required: true
+    }
+  },
+  setup () {
+    const uuid = UniqueID().getID()
+    return {
+      uuid
     }
   }
 }
